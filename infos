@@ -10,3 +10,57 @@ Using functions :
 void    *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
 int     munmap(void *addr, size_t length);
 
+
+———————————————
+
+Malloc :
+
+I. Process’s memory
+
+Heap : continuous space of memory with three bounds: 
+* Starting point
+* Maximum limit
+* Endpoint : the break —> Marks the end of mapped memory space = the part of the virtual adress space that has correspondance into real memory.
+
+To implement my malloc, i need to know where the heap begin and the break position. We have to be able to move the break.
+
+
+II. Unmapped Region and No-Man’s Land
+
+The remaining place between the break and the maximum limit of the heap is not associated to physical memory by the virtual memory manager of the system.
+Memory is mapped by pages: physical memory and virtual memory is organized in pages (frames for the physical memory) of fixed size (MotT). The page size is > one byte (~4096 bytes);
+The break shouldn’t be on pages boundaries. 
+If there is any unmapped region in the page, the memory is available for reading or writing.
+Issue : Don’t have any clue about the next boundary.
+
+The solution is to allocate always the same space, and when you do know where the first one begins you therefore know where it ends (tiny or small in that case for the project)
+At each new block we have a banneer indacating where the next one start : *next;
+
+In the structure of the house you will have the 
+* free boolean, true is free, false is not free
+* the size of the free portion
+* the adress to the next house of the field
+
+In the structure of the field you will have the
+* the type of the zone, tiny or small
+* the size left available in the field
+* the first house of the field
+* the adress to the next field
+
+The function to find a free house -> while we don’t find a free and enough large house for create a new inside this zone, we keep looking for the next one and always keep the last house visited;
+
+First we’re gonna create a new field to place a house inside.
+we get the page size with getpagesize(); the content size is equal to the size we want to allocate + the sizeof field structure;
+
+We will try to find place in a field to allocate a new house.
+If we don’t find any place let’s create a new field and link it to the field list;
+
+Now that we have a new field tiny small or large with the first house, we create a function to see if thee is any place left in this field, if it’s possible to now allocate a new house in this field.
+
+we get the zone corresponding to the type, with a ptr to the last house, if there is no last house this is the first one of the field.
+
+now that we have several fields, we need to know if we can put some house inside it cause we’re not gonna create a zone for one house each time;
+
+
+
+

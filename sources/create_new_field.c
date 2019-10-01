@@ -21,7 +21,9 @@ size_t			get_proper_size(size_t size, int *type, size_t *space_left) {
 	size_t		final_size;
 
 	page_size = getpagesize();
+	printf("page_size equals -> %lu\n", page_size);
 	content_size = size + FIELD_SIZE;
+	printf("content_size -> %lu\n", content_size);
 	// if (content_size > SMALL * page_size) {
 	// 	// TODO for a large size
 	// } else 
@@ -30,12 +32,15 @@ size_t			get_proper_size(size_t size, int *type, size_t *space_left) {
 		final_size = SMALL * page_size;
 		*type = TYPE_SMALL;
 		*space_left = final_size - FIELD_SIZE;
+		printf("field is SMALL\n");
 	} else {
 		// For a TINY allocation we got the infos -->
 		final_size = TINY * page_size;
 		*type = TYPE_TINY;
 		*space_left = final_size - FIELD_SIZE;
+		printf("field is tiny\n");
 	}
+	
 	return (final_size);
 };
 

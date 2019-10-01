@@ -20,8 +20,8 @@
 # define TYPE_SMALL 1
 # define TYPE_LARGE 2
 
-# define TINY 4096
-# define SMALL 4096+4096+4096+4096+4096+4096
+# define TINY 1
+# define SMALL 2
 
 # define HOUSE_SIZE sizeof(struct s_house)
 # define FIELD_SIZE sizeof(struct s_field)

@@ -27,6 +27,7 @@ t_field		*get_last_field() {
 
 	// Get the first base
 	last = get_first_in_list();
+
 	// While there is a field and a next one go to the next and check
 	while (last && last->next) last = last->next;
 	return (last);

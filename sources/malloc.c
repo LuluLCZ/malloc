@@ -20,10 +20,12 @@ int			get_type(size_t size) {
 
 	page_size = getpagesize();
 	content_size = size + FIELD_SIZE;
-	// if (content_size > SMALL * page_size) {
-	// 	// TODO for a large size
-	// } else 
-	if (content_size > TINY * page_size) return TYPE_SMALL;
+	printf("content_size in get_type in malloc %zu\n", content_size);
+	printf("SMALL * page_size get_type in malloc %zu\n", SMALL * page_size);
+	if (content_size > SMALL * page_size) {
+		// TODO for a large size
+		return TYPE_LARGE;
+	} else if (content_size > TINY * page_size) return TYPE_SMALL;
 	else return TYPE_TINY;
 };
 
@@ -38,7 +40,7 @@ void    *ft_malloc(size_t size) {
 	if (size <= 0)
 		return NULL;
 	type = get_type(size);
-	printf("TYPE AT THE BEGINING ---> %d", type);
+	printf("TYPE AT THE BEGINING ---> %d\n", type);
 	house = find_type_and_place_in_field(field, size, type);
 	return (house + 1);
 }

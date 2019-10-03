@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mama <mama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:19:44 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/01 15:07:24 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/02 17:15:43 by mama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@
 # define TYPE_SMALL 1
 # define TYPE_LARGE 2
 
-# define TINY 1
-# define SMALL 2
+# define TINY 2
+# define SMALL 4
 
 # define HOUSE_SIZE sizeof(struct s_house)
 # define FIELD_SIZE sizeof(struct s_field)
+
+# define multiple_4(x) ((((x-1)>>2)<<4)+4)
 
 typedef struct		s_house
 {

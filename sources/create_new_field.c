@@ -20,6 +20,9 @@ size_t			get_proper_size(size_t size, int *type, size_t *space_left) {
 	size_t		page_size;
 	size_t		final_size;
 
+	// Type : (page_size given by getpagesize() generally equals to 4kB - 4096)
+	// Tiny = 2 * page_size | Small = 4 * page_size 
+
 	page_size = getpagesize();
 	printf("page_size equals -> %lu\n", page_size);
 	content_size = size + FIELD_SIZE;

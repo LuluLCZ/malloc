@@ -31,6 +31,8 @@ int			get_type(size_t size) {
 
 // Alloc "size" memory and return pointer to the allocated memory usgin mmap function
 void    *ft_malloc(size_t size) {
+	printf("--------------------------MALLOC-----------------------\n");
+
 	t_field		*field;
 	t_house		*house;
 	t_house		*last_house;	

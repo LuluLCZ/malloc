@@ -13,6 +13,28 @@
 #include "../includes/malloc.h"
 #include <stdio.h>
 
+t_house			*search_room_for_house(size_t size, int type) {
+	t_field		*field;
+	t_house		*house;
+
+	field = get_first_in_list();
+	while (field) {
+		if (field->type == type) {
+			house = field->base;
+			if (!house) return NULL;
+			while (house) {
+				if (house->free == true && house->size >= size) {
+					house->free = false;
+					return house;
+				}
+				house = house->next;
+			}
+		}
+		field = field->next;
+	}
+	return (NULL);
+}
+
 t_house			*create_new_house(t_field *field, t_house *last_house, size_t size) {
 	t_house		*new_house;
 	t_field		*new_field;
@@ -31,7 +53,10 @@ t_house			*create_new_house(t_field *field, t_house *last_house, size_t size) {
 	// We keep the track of the last house by updating it
 	if (last_house) {
 		last_house->next = new_house;
-	} else field->base = new_house;
+	} else {
+		field->base = new_house;
+		printf("In this case, the last house doesn't exisits\n");
+	}
 
 	// We initialize the new house
 	new_house->next = NULL;
@@ -50,6 +75,13 @@ t_house			*find_type_and_place_in_field(t_field *field, size_t size, int type) {
 
 	field = get_first_in_list();
 
+	// We first check if there is a field with a free house available for this new malloc;
+	new_house = search_room_for_house(size, type);
+	if (new_house) {
+		printf("We found some place for the house to be allocated\n");
+		return (new_house);
+	}
+
 	while (field && field->type != type && field->remain_size <= size + HOUSE_SIZE) field = field->next;
 
 	// If we find a field with the same type and enough available place -> create block at the end of the list
@@ -60,7 +92,7 @@ t_house			*find_type_and_place_in_field(t_field *field, size_t size, int type) {
 		printf("type 1 is tiny 2 is small -> %d\n", field->type);
 	}
 	
-	if (field && field->remain_size >= (size + HOUSE_SIZE)) {
+	if (field && field->remain_size > (size + HOUSE_SIZE)) {
 		last_house = get_last_house(field);
 		new_house = create_new_house(field, last_house, size);
 		printf("remain size on already existant field before returning ptr of the house to malloc %lu\n", field->remain_size);

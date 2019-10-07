@@ -16,7 +16,8 @@ SRC =	${DIR_SRC}/malloc.c\
 		${DIR_SRC}/create_new_field.c\
 		${DIR_SRC}/get_set_base_last.c\
 		${DIR_SRC}/search_available_house.c\
-		${DIR_SRC}/main.c
+		${DIR_SRC}/main.c\
+		${DIR_SRC}/free.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -45,6 +45,17 @@ typedef struct		s_field
 
 
 /*
+The free structure is usefull when i'm looking for the house and the field,
+it contains the field and the house where the ptr to free is located
+*/
+typedef struct		s_free
+{
+	t_field			*field;
+	t_house			*house;
+}					t_free;
+
+
+/*
 Functions to implement
 */
 

@@ -39,9 +39,12 @@ int main()
     //     printf("%d", ptr[i]);
     // } 
   
-    char *titi1 = (char *)ft_malloc(4099);
-    char *titi2 = (char *)ft_malloc(4014);
-    char *titi3 = (char *)ft_malloc(20);
-
+    char *titi3 = (char *)ft_malloc(2500);
+    // ft_free(titi3);
+    char *titi4 = (char *)ft_malloc(2500);
+    ft_free(titi4);
+    char *titi5 = (char *)ft_malloc(1000);
+    ft_free(titi3);
+    ft_free(titi5);
     return 0; 
 } 

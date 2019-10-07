@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_available_house.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mama <mama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 11:12:40 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/01 15:35:58 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/07 16:49:21 by mama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_house			*create_new_house(t_field *field, t_house *last_house, size_t size) {
 	new_house->next = NULL;
 	new_house->free = false;
 	new_house->size = size;
+	new_house->address = new_house + sizeof(HOUSE_SIZE);
 
 	// Do not forget to update the size remaining in the field if field type != large
 	if (field->type != TYPE_LARGE) field->remain_size = field->remain_size - (size + HOUSE_SIZE);

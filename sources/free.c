@@ -6,7 +6,7 @@
 /*   By: mama <mama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 15:44:18 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/02 17:15:46 by mama             ###   ########.fr       */
+/*   Updated: 2019/10/07 17:13:30 by mama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 t_house				*house_according_ptr(void *ptr) {
 	t_house			*house;
 
-	house = (t_house *)(ptr - HOUSE_SIZE);
+	house = (t_house *)(ptr) + HOUSE_SIZE;
 	if (house) {
 		printf("House found ->%zu\n", house->size);
 		return (house);
@@ -34,7 +34,7 @@ t_field				*field_according_house(t_house *house) {
 	field = get_first_in_list();
 	while (field) {
 		if (field->base == house) {
-			printf("Field found \n");
+			printf("First house in field \n");
 			return (field);
 		}
 		tmp = field->base;
@@ -62,20 +62,21 @@ t_free				find_field_house_according_ptr(void *ptr) {
 	// We need to find the house corresponding to the given ptr
 	field = get_first_in_list();
 	while (field) {
+		printf("field base size -> %zu\n", field->base->size);
 		house = field->base;
 		printf("house->size %zu\n", house->size);
 		while (house) {
-			if ((void *)(house + 1) == ptr) {
+			if ((void *)house == ptr - sizeof(HOUSE_SIZE)) {
 				result.field = field;
 				result.house = house;
 				return result;
 			}
-
+			printf("house0>Size %zu \n", house->size);
 			house = house->next;
 		}
-		printf("-walah ca marche pas\n");
 		field = field->next;
 	}
+		printf("-walah ca marche pas\n");
 	return (result);
 }
 
@@ -131,13 +132,13 @@ void				ft_free(void *ptr) {
 	int				type;
 
 	if (!ptr) return ;
-	// field_house = find_field_house_according_ptr(ptr);
-	house = house_according_ptr(ptr);
-	if (house) field = field_according_house(house);
+	field_house = find_field_house_according_ptr(ptr);
+	// house = house_according_ptr(ptr);
+	// if (house) field = field_according_house(house);
 	// HERE PROBLEM THE HOUSE WE JUST GET IS NULLLLLL
-	if (field && house->free == false) {
-		printf("Field found, checking if we need to delete the page\n");
-	}
-	house->free = true;
+	// if (field && house->free == false) {
+	// 	printf("Field found, checking if we need to delete the page\n");
+	// }
+	// house->free = true;
 	// clean_field(field);
 }

@@ -6,7 +6,7 @@
 /*   By: mama <mama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:19:44 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/02 17:15:43 by mama             ###   ########.fr       */
+/*   Updated: 2019/10/07 16:35:46 by mama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct		s_house
 {
 	size_t			size;
 	bool			free;
+	void			*address;
 	struct s_house	*next;
 }					t_house;
 

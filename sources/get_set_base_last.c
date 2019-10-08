@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 19:41:57 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/01 11:41:54 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/08 18:24:30 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_field		*get_last_field() {
 	last = get_first_in_list();
 
 	// While there is a field and a next one go to the next and check
-	while (last && last->next) last = last->next;
+	while (last && last->next && last->next) last = last->next;
 	return (last);
 }
 

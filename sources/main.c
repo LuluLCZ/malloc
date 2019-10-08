@@ -1,50 +1,63 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include "../includes/malloc.h"
+#include <unistd.h>
+
+#define M (1024 * 1024)
+
+void print(char *s) {
+    write(1, s, strlen(s));
+}
 
 int main() 
 { 
+    // ------------------------------
+    // char *addr;
+
+    // addr = ft_malloc(16);
+    // ft_free(NULL);
+    // ft_free((void *)addr + 5);
+    // if (ft_realloc((void *)addr + 5, 10) == NULL) print("Bonjours\n");
+    //-----------------------------------
   
-    // This pointer will hold the 
-    // base address of the block created 
-    // int* ptr; 
-    // int n, i, sum = 0; 
-  
-    // // Get the number of elements for the array 
-    // n = 987654; 
-    // printf("Enter number of elements: %d\n", n); 
-  
-    // // Dynamically allocate memory using malloc() 
-    // ptr = (int*)ft_malloc(n * sizeof(int)); 
-  
-    // // Check if the memory has been successfully 
-    // // allocated by malloc or not 
-    // if (ptr == NULL) { 
-    //     printf("Memory not allocated.\n"); 
-    //     exit(0); 
-    // } 
-    // else { 
-    //     // Memory has been successfully allocated 
-    //     printf("Memory successfully allocated using malloc.\n"); 
-  
-    //     // Get the elements of the array 
-    //     for (i = 0; i < n; ++i) { 
-    //         ptr[i] = i + 1; 
-    //     } 
-    //     // Print the elements of the array 
-    //     printf("The elements of the array are: "); 
-    //     for (i = 0; i < n; ++i) { 
-    //         // printf("%d, ", ptr[i]); 
-    //     } 
-    //     printf("%d", ptr[i]);
-    // } 
-  
-    char *titi3 = (char *)ft_malloc(2500);
-    // ft_free(titi3);
-    char *titi4 = (char *)ft_malloc(2500);
-    ft_free(titi4);
-    char *titi5 = (char *)ft_malloc(1000);
-    ft_free(titi3);
-    ft_free(titi5);
+    // char *malloc1 = (char *)ft_malloc(200);
+    // ft_free(malloc1);
+    // char *malloc2 = (char *)ft_malloc(4096*2);
+    // ft_free(malloc2);
+    // char *malloc4 = (char *)ft_malloc(200);
+    // char *malloc3 = (char *)ft_malloc(1000);
+    // ft_free(malloc1);
+    // ft_free(malloc3);
+    // ft_free(malloc4);
+
+    // char *malloc1 = (char *)ft_malloc(4);
+    // malloc1 = (char *)ft_realloc(malloc1, 4096*3);
+    // printf("%s", malloc1);
+    // char *malloc2 = ft_calloc(2, 4096);
+    // ft_free(malloc2);
+    // ------------------------------------
+    // int i;
+    // char *addr;
+
+    // i = 0;
+    // while (i < 1024)
+    // {
+    //     addr = (char *)ft_malloc(1024);
+    //     addr[0] = 42;
+    //     // ft_free(addr);
+    //     i++;
+    // }
+    // ------------------------------------
+    // char *addr1;
+    // char *addr2;
+    // char *addr3;
+
+    // addr1 = (char *)ft_malloc(16*M);
+    // strcpy(addr1, "Bonjours\n");
+    // print(addr1);
+    // addr2 = (char *)ft_malloc(16*M);
+    // addr3 = (char *)ft_realloc(addr1, 128*M);
+    // addr3[127*M] = 42;
+    // print(addr3);
     return 0; 
 } 

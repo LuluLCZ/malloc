@@ -17,7 +17,9 @@ SRC =	${DIR_SRC}/malloc.c\
 		${DIR_SRC}/get_set_base_last.c\
 		${DIR_SRC}/search_available_house.c\
 		${DIR_SRC}/main.c\
-		${DIR_SRC}/free.c
+		${DIR_SRC}/free.c\
+		${DIR_SRC}/realloc.c\
+		${DIR_SRC}/calloc.c
 
 OBJ = $(SRC:.c=.o)
 

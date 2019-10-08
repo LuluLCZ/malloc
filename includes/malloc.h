@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mama <mama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:19:44 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/07 16:35:46 by mama             ###   ########.fr       */
+/*   Updated: 2019/10/08 18:01:52 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define TYPE_SMALL 1
 # define TYPE_LARGE 2
 
-# define TINY 2
-# define SMALL 4
+# define TINY (2 * getpagesize())
+# define SMALL (4 * getpagesize())
 
 # define HOUSE_SIZE sizeof(struct s_house)
 # define FIELD_SIZE sizeof(struct s_field)
@@ -32,7 +32,6 @@ typedef struct		s_house
 {
 	size_t			size;
 	bool			free;
-	void			*address;
 	struct s_house	*next;
 }					t_house;
 
@@ -63,6 +62,7 @@ Functions to implement
 void				*ft_malloc(size_t size);
 void				ft_free(void *ptr);
 void				*ft_realloc(void *ptr, size_t size);
+void				*ft_calloc(size_t count, size_t size);
 
 
 /*
@@ -89,6 +89,17 @@ search_available_house.c
 
 t_house				*create_new_house(t_field *field, t_house *last_house, size_t size);
 t_house				*find_type_and_place_in_field(t_field *field, size_t size, int type);
+
+/*
+free.c
+*/
+t_free				find_field_house_according_ptr(void *ptr, bool need_to_free);
+
+/*
+realloc.c
+*/
+
+
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:19:44 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/08 18:01:52 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/09 18:40:16 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 # define TYPE_SMALL 1
 # define TYPE_LARGE 2
 
-# define TINY (2 * getpagesize())
-# define SMALL (4 * getpagesize())
+# define TINY (500 * getpagesize())
+# define SMALL (1000 * getpagesize())
 
 # define HOUSE_SIZE sizeof(struct s_house)
 # define FIELD_SIZE sizeof(struct s_field)
+
+# define HOUSE_ADDRESS(house) ((void *)(char *)house + sizeof(t_house) + 1)
+# define FIELD_ADDRESS(field) ((void *)(char *)field + sizeof(t_field) + 1)
 
 # define multiple_4(x) ((((x-1)>>2)<<4)+4)
 
@@ -40,6 +43,7 @@ typedef struct		s_field
 	int				type;
 	size_t			remain_size;
 	t_house			*base;
+	size_t			final_size;
 	struct s_field	*next;
 }					t_field;
 
@@ -100,6 +104,10 @@ realloc.c
 */
 
 
+/*
+show_alloc_mem.c
+*/
+void				show_alloc_mem();
 
 
 #endif

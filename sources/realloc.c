@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 17:25:16 by mama              #+#    #+#             */
-/*   Updated: 2019/10/08 17:59:50 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/09 17:51:50 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void				*ft_realloc(void *ptr, size_t size) {
 
 	// We need to find the house provided to free it and allocate it again
 	field_house = find_field_house_according_ptr(ptr, false);
-	if (field_house.field && field_house.house) {
+	if (!field_house.field || !field_house.house) return NULL;
+	else {
 		if (field_house.house->free) return NULL;
 		else {
 			if (field_house.house->size == size) return (ptr);

@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 15:44:18 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/08 18:05:18 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/09 19:34:49 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ t_free				find_field_house_according_ptr(void *ptr, bool need_to_free) {
 
 	// We need to find the house corresponding to the given ptr
 	field = get_first_in_list();
+	result.house = NULL;
+	result.field = NULL;
 	while (field) {
 		house = field->base;
 		while (house) {
 			// If the address of the pointer equals the house, return field and house
 			if (ptr - HOUSE_SIZE == house) {
 				// printf("FOUND: ptr->address %p \n", ptr - HOUSE_SIZE);
-				// printf("FOUND: house->address %p \n", house);
 				if (need_to_free) {
+					// printf("FOUND: house->address %p \n", house);
 					house->free = 1;
 				}
 				result.field = field;
@@ -36,6 +38,7 @@ t_free				find_field_house_according_ptr(void *ptr, bool need_to_free) {
 			}
 			// printf("house->address %p \n", (void *)house);
 			// printf("ptr->address %p \n", ptr - HOUSE_SIZE);
+			// printf("out");
 			house = house->next;
 		}
 		field = field->next;
@@ -49,7 +52,16 @@ void				delete_the_field(t_field *field) {
 	// Here we are checking if the field that we're gonna munmap is the first of the list
 	new_linked = get_first_in_list();
 	// If it is, we just unmap it we don't care
-	if (new_linked == field) return;
+	if (new_linked == field) {
+		if (!field->next) {
+			field->base = NULL;
+			field = NULL;
+		} else {
+			new_linked = field->next;
+			field->base = NULL;
+		}
+		return;
+	}
 	// If it's not, we need to link its previous field to the next field so we keep a linked list;
 	while (new_linked && new_linked->next != field) new_linked = new_linked->next;
 	if (new_linked->next == field) new_linked->next = field->next;
@@ -64,27 +76,30 @@ void				clean_field(t_field *field) {
 	// We check how much house there is in the field, and how much of them are free. If all are free, we just munmap the page;
 	free_counter = 0;
 	house_counter = 0;
-	if (field->base) {
+	if (!field || !field->base) {
+		// printf("IOJWEOIJFOWEJFWJEFOIQWPFJWEOIFJQPWIEJFOIQFIOVQNOPFHQVIUNVIUQWVOINQUWNOVIUWNok");
+		return;
+	}
+	else {
 		house = field->base;
 	}
-	else return ;
-	if (house) {
-		while (house) {
-			if (house->free) free_counter++;
-			house_counter++;
-			house = house->next;
-		}
-		// printf("We found %zu free_house and there is %zu house in the field\n", free_counter, house_counter);
-		if (house_counter == free_counter != 0) {
-			printf("+-----------------+\n|FREEING THE FIELD|\n+-----------------+\n");
-			delete_the_field(field);
-			munmap((void *)(field + 1), sizeof(field) + FIELD_SIZE);
-		}
+	while (house) {
+		if (house->free) free_counter++;
+		house_counter++;
+		house = house->next;
+	}
+	// printf("We found %zu free_house and there is %zu house in the field\n", free_counter, house_counter);
+	if (house_counter == free_counter != 0) {
+		// printf("+-----------------+\n|FREEING THE FIELD|\n+-----------------+\n");
+		delete_the_field(field);
+		// printf("|%zu|", sizeof(FIELD_SIZE));
+		munmap(field - FIELD_SIZE, field->final_size + sizeof(FIELD_SIZE));
 	}
 }
 
+
 void				ft_free(void *ptr) {
-	printf("--------------------------FREE-----------------------\n");
+	// printf("--------------------------FREE-----------------------\n");
 	t_field			*field;
 	t_house			*house;
 	t_free			field_house;
@@ -92,7 +107,8 @@ void				ft_free(void *ptr) {
 	if (!ptr) return ;
 	field_house = find_field_house_according_ptr(ptr, true);
 	if (field_house.field && field_house.house) {
+		// printf("O");
 		clean_field(field_house.field);
-	printf("---------------------------END FREE-------------------\n");
+	// printf("---------------------------END FREE-------------------\n");
 	} else return ;
 }

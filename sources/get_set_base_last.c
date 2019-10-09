@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 19:41:57 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/08 18:24:30 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/09 15:52:50 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_house		*get_last_house(t_field *field) {
 	t_house		*last_house;
 
 	last_house = field->base;
-	while (last_house) last_house = last_house->next;
+	while (last_house->next != NULL) last_house = last_house->next;
 	return (last_house);
 }
 

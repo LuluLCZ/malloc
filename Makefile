@@ -19,7 +19,8 @@ SRC =	${DIR_SRC}/malloc.c\
 		${DIR_SRC}/main.c\
 		${DIR_SRC}/free.c\
 		${DIR_SRC}/realloc.c\
-		${DIR_SRC}/calloc.c
+		${DIR_SRC}/calloc.c\
+		${DIR_SRC}/show_alloc_mem.c
 
 OBJ = $(SRC:.c=.o)
 

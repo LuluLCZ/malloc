@@ -6,13 +6,14 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:11:21 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/08 17:50:59 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/09 19:34:59 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <math.h>
 
 int			get_type(size_t size) {
 	size_t		content_size;
@@ -20,9 +21,9 @@ int			get_type(size_t size) {
 	content_size = size + FIELD_SIZE;
 	// printf("content_size in get_type in malloc %zu\n", content_size);
 	// printf("SMALL * page_size get_type in malloc %zu\n", SMALL * page_size);
-	if (content_size > SMALL) {
+	if (content_size > round(SMALL/100)) {
 		return TYPE_LARGE;
-	} else if (content_size > TINY) return TYPE_SMALL;
+	} else if (content_size > round(TINY/100)) return TYPE_SMALL;
 	else return TYPE_TINY;
 };
 

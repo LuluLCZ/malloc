@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 11:12:40 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/08 18:03:52 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/09 18:28:19 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_house			*search_room_for_house(size_t size, int type) {
 			if (!house) return NULL;
 			while (house) {
 				if (house->free == true && house->size >= size) {
+					// printf("FWOFKWPOQFKQPOWFKQOPWEFKQWOPEKFQOPWEFKQPOWEKFOQPWEKPFKQWPOFKQOWEKFPOQWFKQWPOEFKQPOWKE");
 					house->free = false;
 					return house;
 				}
@@ -70,6 +71,7 @@ t_house			*create_new_house(t_field *field, t_house *last_house, size_t size) {
 	// Do not forget to update the size remaining in the field if field type != large
 	if (field->type != TYPE_LARGE) {
 		field->remain_size = field->remain_size - (size + HOUSE_SIZE);
+		// printf("field remain %zu", field->remain_size);
 	}
 	return (new_house);
 };
@@ -80,7 +82,7 @@ t_field			*find_field_according_to_size_type(t_field *field, size_t size, int ty
 		if (field->type == type && field->remain_size > size + HOUSE_SIZE) break;
 		field = field->next;
 	}
-	if (!field || !field->next) return NULL;
+	if (!field) return NULL;
 	return field;
 }
 
@@ -99,13 +101,16 @@ t_house			*find_type_and_place_in_field(t_field *field, size_t size, int type) {
 	field = find_field_according_to_size_type(field, size, type);
 	// If we find a field with the same type and enough available place -> create block at the end of the list
 	// If there is no room for the house, do as if you had no field
-	if ((field && field->remain_size > (size + HOUSE_SIZE) && field->type == type) || (field && field->type == TYPE_LARGE)) {
+	if ((field && field->remain_size >= (size + HOUSE_SIZE) && field->type == type) || (field && field->type != TYPE_LARGE)) {
 		last_house = get_last_house(field);
 		new_house = create_new_house(field, last_house, size);
+		// printf("old field %zu\n", field->remain_size);
 		// printf("remain size on already existant field before returning ptr of the house to malloc %lu\n", field->remain_size);
 	} else { // Else we create a field corresponding to the size given
 		new_field = create_new_field(size);
 		new_house = create_new_house(new_field, NULL, size);
+		// if (field) printf("new field %zu\n", field->remain_size);
+		// printf("FIELD TYPE : %d | HOUSE SIZE %zu", new_field->type, new_house->size);
 		// printf("remain size of new field before returning ptr of the house to malloc %lu\n", new_field->remain_size);
 		// printf("size of first house of the field we just created before returning ptr of the house to malloc %lu\n", new_house->size);
 	}

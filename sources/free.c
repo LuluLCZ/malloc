@@ -6,27 +6,30 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 15:44:18 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/09 19:34:49 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/11 17:00:18 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 #include <stdio.h>
+#include <unistd.h>
 
 t_free				find_field_house_according_ptr(void *ptr, bool need_to_free) {
 	t_field			*field;
 	t_house			*house;
 	t_free			result;
 
+
 	// We need to find the house corresponding to the given ptr
 	field = get_first_in_list();
 	result.house = NULL;
 	result.field = NULL;
+	// printf("first field-> %p\n", field);
 	while (field) {
 		house = field->base;
 		while (house) {
 			// If the address of the pointer equals the house, return field and house
-			if (ptr - HOUSE_SIZE == house) {
+			if (ptr - HOUSE_SIZE== house) {
 				// printf("FOUND: ptr->address %p \n", ptr - HOUSE_SIZE);
 				if (need_to_free) {
 					// printf("FOUND: house->address %p \n", house);
@@ -54,6 +57,7 @@ void				delete_the_field(t_field *field) {
 	// If it is, we just unmap it we don't care
 	if (new_linked == field) {
 		if (!field->next) {
+			new_linked = NULL;
 			field->base = NULL;
 			field = NULL;
 		} else {
@@ -92,23 +96,36 @@ void				clean_field(t_field *field) {
 	if (house_counter == free_counter != 0) {
 		// printf("+-----------------+\n|FREEING THE FIELD|\n+-----------------+\n");
 		delete_the_field(field);
+		// printf("freeing this field -> %p\n", field);
 		// printf("|%zu|", sizeof(FIELD_SIZE));
-		munmap(field - FIELD_SIZE, field->final_size + sizeof(FIELD_SIZE));
+		munmap(field + FIELD_SIZE, field->final_size + sizeof(FIELD_SIZE));
 	}
 }
 
 
-void				ft_free(void *ptr) {
-	// printf("--------------------------FREE-----------------------\n");
+void				free(void *ptr) {
+	// fprintf(stderr, "trying to free %p\n", ptr);
+	ft_putstr("--------------------------FREE-----------------------\n");
 	t_field			*field;
 	t_house			*house;
 	t_free			field_house;
 	int				type;
-	if (!ptr) return ;
-	field_house = find_field_house_according_ptr(ptr, true);
-	if (field_house.field && field_house.house) {
-		// printf("O");
-		clean_field(field_house.field);
-	// printf("---------------------------END FREE-------------------\n");
-	} else return ;
+
+	// printf("ad")
+	if (ptr == NULL) {
+		write(1, "ptr NULL\n", 10);
+		return ;
+	}
+	else {
+		field_house = find_field_house_according_ptr(ptr, true);
+		if (field_house.field != NULL && field_house.house != NULL) {
+			// write(1, "field and house found\n", 23);
+			clean_field(field_house.field);
+			write(1, "--------------------------END1FREE-------------------\n", 55);
+		} else {
+			write(1, "--------------------------END2FREE-------------------\n", 55);
+			fprintf(stderr, "trying to free %p\n", ptr);
+			return ;
+		}
+	}
 }

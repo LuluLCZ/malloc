@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:19:44 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/09 18:40:16 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/11 16:39:18 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define TYPE_SMALL 1
 # define TYPE_LARGE 2
 
-# define TINY (500 * getpagesize())
-# define SMALL (1000 * getpagesize())
+# define TINY (5120 * getpagesize())
+# define SMALL (10240 * getpagesize())
 
 # define HOUSE_SIZE sizeof(struct s_house)
 # define FIELD_SIZE sizeof(struct s_field)
@@ -45,6 +45,7 @@ typedef struct		s_field
 	t_house			*base;
 	size_t			final_size;
 	struct s_field	*next;
+	struct s_field	*prev;
 }					t_field;
 
 
@@ -63,10 +64,10 @@ typedef struct		s_free
 Functions to implement
 */
 
-void				*ft_malloc(size_t size);
-void				ft_free(void *ptr);
-void				*ft_realloc(void *ptr, size_t size);
-void				*ft_calloc(size_t count, size_t size);
+void				*malloc(size_t size);
+void				free(void *ptr);
+void				*realloc(void *ptr, size_t size);
+void				*calloc(size_t count, size_t size);
 
 
 /*
@@ -81,7 +82,8 @@ t_field				*create_new_field(size_t size);
 get_set_base_last.c
 */
 
-void				*get_first_in_list();
+t_field				**first_in_list();
+t_field				*get_first_in_list();
 void				set_field_base(void *new_base);
 t_field				*get_last_field();
 void				link_fields();

@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 11:20:38 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/09 19:31:15 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/11 13:40:03 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			show_alloc_mem() {
 	field = get_first_in_list();
 	// printf("%--zu--", field->base->size);
 	while (field) {
+		if (!field->base) return ;
 		tmp_prev = type;
 		type = field->type;
 		house = field->base;

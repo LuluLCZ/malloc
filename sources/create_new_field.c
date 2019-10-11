@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:24:47 by llacaze           #+#    #+#             */
-/*   Updated: 2019/10/09 19:30:44 by llacaze          ###   ########.fr       */
+/*   Updated: 2019/10/11 17:03:16 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_field			*create_new_field(size_t size) {
 	size_t		final_size;
 
 	final_size = get_proper_size(size, &type, &space_left);
-	field = mmap(0, final_size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	field = mmap(0, final_size + FIELD_SIZE, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (field == (void *)-1) {
 		printf("wesh1");
 		return NULL;

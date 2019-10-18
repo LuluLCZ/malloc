@@ -18,6 +18,7 @@
 int			get_type(size_t size) {
 	size_t		content_size;
 
+	
 	content_size = size + FIELD_SIZE;
 	// printf("content_size in get_type in malloc %zu\n", content_size);
 	// printf("SMALL * page_size get_type in malloc %zu\n", SMALL * page_size);
@@ -29,7 +30,7 @@ int			get_type(size_t size) {
 
 // Alloc "size" memory and return pointer to the allocated memory usgin mmap function
 void    *malloc(size_t size) {
-	ft_putstr("---------------------MALLOC---------------------\n");
+	// ft_putstr("---------------------MALLOC---------------------\n");
 	t_field		*field;
 	t_house		*house;
 	t_house		*last_house;	
@@ -40,17 +41,22 @@ void    *malloc(size_t size) {
 		write(1, "o", 1);
 		return NULL;
 	}
+	if (size % 16 != 0) {
+		
+		size = size + 16 - (size % 16);
+		// printf("%zu", size);
+	}
 	// size = multiple_4(size);
-	ft_putnbr(size);
-	ft_putchar('|');
+	// ft_putnbr(size);
+	// ft_putchar('|');
 	// fprintf(stdout, "\n%zu\n", size);
-	type = get_type(size);
-	ft_putnbr(type);
+	// type = get_type(size);
+	// ft_putnbr(type);
 	// printf("TYPE AT THE BEGINING ---> %d\n", type);
 	house = find_type_and_place_in_field(field, size, type);
 	// printf("returning %p\n", house);
 
-	fprintf(stderr, "address returned by malloc %p\n", house);
-	ft_putstr("-----------------END MALLOC---------------------\n");
+	// fprintf(stderr, "address returned by malloc %p\n", house);
+	// ft_putstr("-----------------END MALLOC---------------------\n");
 	return (house + 1);
 }

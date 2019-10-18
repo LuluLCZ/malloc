@@ -105,7 +105,7 @@ void				clean_field(t_field *field) {
 
 void				free(void *ptr) {
 	// fprintf(stderr, "trying to free %p\n", ptr);
-	ft_putstr("--------------------------FREE-----------------------\n");
+	// ft_putstr("--------------------------FREE-----------------------\n");
 	t_field			*field;
 	t_house			*house;
 	t_free			field_house;
@@ -113,7 +113,7 @@ void				free(void *ptr) {
 
 	// printf("ad")
 	if (ptr == NULL) {
-		write(1, "ptr NULL\n", 10);
+		// write(1, "ptr NULL\n", 10);
 		return ;
 	}
 	else {
@@ -121,10 +121,10 @@ void				free(void *ptr) {
 		if (field_house.field != NULL && field_house.house != NULL) {
 			// write(1, "field and house found\n", 23);
 			clean_field(field_house.field);
-			write(1, "--------------------------END1FREE-------------------\n", 55);
+			// write(1, "--------------------------END1FREE-------------------\n", 55);
 		} else {
-			write(1, "--------------------------END2FREE-------------------\n", 55);
-			fprintf(stderr, "trying to free %p\n", ptr);
+			// write(1, "--------------------------END2FREE-------------------\n", 55);
+			// fprintf(stderr, "trying to free %p\n", ptr);
 			return ;
 		}
 	}

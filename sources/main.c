@@ -21,7 +21,7 @@ int main()
         free(addr);
         i++;
     }
-    show_alloc_mem();
+    // show_alloc_mem();
     return 0;
     // ------------------------------
     // char *addr;
@@ -115,6 +115,6 @@ int main()
     // free(addr13);
     // free(addr14);
     // free(addr15);
-    show_alloc_mem();
+    // show_alloc_mem();
     return 0; 
 } 

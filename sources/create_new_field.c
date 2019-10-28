@@ -32,6 +32,7 @@ size_t			get_proper_size(size_t size, int *type, size_t *space_left) {
 		// For a SMALL allocation we got the infos ->
 		final_size = SMALL;
 		*type = TYPE_SMALL;
+		// size = size + 16 - (size % 16);
 		*space_left = final_size - FIELD_SIZE;
 		// printf("field is SMALL\n");
 	} else if (content_size <= round(TINY / 100)) {

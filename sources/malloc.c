@@ -30,7 +30,10 @@ int			get_type(size_t size) {
 
 // Alloc "size" memory and return pointer to the allocated memory usgin mmap function
 void    *malloc(size_t size) {
-	// ft_putstr("---------------------MALLOC---------------------\n");
+	ft_putstr("---------------------MALLOC---------------------\n");
+	ft_putstr("sizeof(house) == ");
+	ft_putnbr(sizeof(t_house));
+	ft_putstr("\n");
 	t_field		*field;
 	t_house		*house;
 	t_house		*last_house;	
@@ -39,7 +42,7 @@ void    *malloc(size_t size) {
 	// Protect your malloc if size if null
 	if (size <= 0) {
 		write(1, "o", 1);
-		return NULL;
+		size = 16;
 	}
 	if (size % 16 != 0) {
 		
@@ -57,6 +60,10 @@ void    *malloc(size_t size) {
 	// printf("returning %p\n", house);
 
 	// fprintf(stderr, "address returned by malloc %p\n", house);
-	// ft_putstr("-----------------END MALLOC---------------------\n");
+	// ft_putnbr();
+	if ((intptr_t)(house + 1) % 16 != 0) {
+		ft_putstr("pas bon");
+	}
+	ft_putstr("-----------------END MALLOC---------------------\n");
 	return (house + 1);
 }

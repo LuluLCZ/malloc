@@ -20,6 +20,7 @@
 */
 
 void				*calloc(size_t count, size_t size) {
+	ft_putstr("-----------CALLOCATION-------------\n");
 	void			*house;
 
 	if (count == 0 || size == 0) return NULL;
@@ -28,7 +29,9 @@ void				*calloc(size_t count, size_t size) {
 	// Then we need to put 0 on any byte of the bloc 
 	if (house) {
 		ft_bzero(house, size * count);
+		ft_putstr("-----------END1CALLOCATION-------------\n");
 		return (house);
 	}
+	ft_putstr("-----------END2CALLOCATION-------------\n");
 	return (NULL);
 }

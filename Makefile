@@ -36,6 +36,7 @@ HEAD_DIR = ./libft/
 all:  $(NAME)
 
 $(NAME) : libft $(OBJS)
+	$(RM) $(NAME)
 	$(CC) -shared -o $@ $(OBJS) $(HEAD_DIR)/libft.a
 	ln -fs $(NAME) libft_malloc.so
 
@@ -51,8 +52,10 @@ clean:
 	cd $(HEAD_DIR) && $(MAKE) $@
 
 fclean: clean
-	$(RM) $(OBJ)
+	$(RM) $(OBJS)
 	$(RM) $(NAME)
+
+
 	make -C $(HEAD_DIR) fclean
 
 re: fclean all

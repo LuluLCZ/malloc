@@ -72,7 +72,7 @@ void				delete_the_field(t_field *field) {
 }
 
 void				clean_field(t_field *field) {
-	// printf("--------------------------CLEANING-------------------\n");
+	ft_putstr("--------------------------CLEANING-------------------\n");
 	size_t			house_counter;
 	size_t			free_counter;
 	t_house			*house;
@@ -94,7 +94,7 @@ void				clean_field(t_field *field) {
 	}
 	// printf("We found %zu free_house and there is %zu house in the field\n", free_counter, house_counter);
 	if (house_counter == free_counter != 0) {
-		// printf("+-----------------+\n|FREEING THE FIELD|\n+-----------------+\n");
+		ft_putstr("+-----------------+\n|FREEING THE FIELD|\n+-----------------+\n");
 		delete_the_field(field);
 		// printf("freeing this field -> %p\n", field);
 		// printf("|%zu|", sizeof(FIELD_SIZE));
@@ -105,7 +105,7 @@ void				clean_field(t_field *field) {
 
 void				free(void *ptr) {
 	// fprintf(stderr, "trying to free %p\n", ptr);
-	// ft_putstr("--------------------------FREE-----------------------\n");
+	ft_putstr("--------------------------FREE-----------------------\n");
 	t_field			*field;
 	t_house			*house;
 	t_free			field_house;
@@ -113,7 +113,7 @@ void				free(void *ptr) {
 
 	// printf("ad")
 	if (ptr == NULL) {
-		// write(1, "ptr NULL\n", 10);
+		write(1, "ptr NULL\n", 10);
 		return ;
 	}
 	else {
@@ -121,9 +121,9 @@ void				free(void *ptr) {
 		if (field_house.field != NULL && field_house.house != NULL) {
 			// write(1, "field and house found\n", 23);
 			clean_field(field_house.field);
-			// write(1, "--------------------------END1FREE-------------------\n", 55);
+			write(1, "--------------------------END1FREE-------------------\n", 55);
 		} else {
-			// write(1, "--------------------------END2FREE-------------------\n", 55);
+			write(1, "--------------------------END2FREE-------------------\n", 55);
 			// fprintf(stderr, "trying to free %p\n", ptr);
 			return ;
 		}

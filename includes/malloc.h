@@ -20,8 +20,8 @@
 # define TYPE_SMALL 1
 # define TYPE_LARGE 2
 
-# define TINY (5120 * getpagesize())
-# define SMALL (10240 * getpagesize())
+# define TINY (256 * getpagesize())
+# define SMALL (512 * getpagesize())
 
 # define HOUSE_SIZE sizeof(struct s_house)
 # define FIELD_SIZE sizeof(struct s_field)
@@ -29,13 +29,14 @@
 # define HOUSE_ADDRESS(house) ((void *)(char *)house + sizeof(t_house) + 1)
 # define FIELD_ADDRESS(field) ((void *)(char *)field + sizeof(t_field) + 1)
 
-# define multiple_4(x) ((((x-1)>>2)<<4)+4)
+# define multiple_4(x) ()
 
 typedef struct		s_house
 {
-	size_t			size;
-	bool			free;
 	struct s_house	*next;
+	bool			free;
+	size_t			size;
+	char			pad[8];
 }					t_house;
 
 typedef struct		s_field
@@ -104,6 +105,8 @@ t_free				find_field_house_according_ptr(void *ptr, bool need_to_free);
 /*
 realloc.c
 */
+void				*reallocf(void *ptr, size_t size);
+
 
 
 /*

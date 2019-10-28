@@ -51,7 +51,12 @@ t_house			*create_new_house(t_field *field, t_house *last_house, size_t size) {
 	// }
 	if (last_house != NULL) {
 		new_house = (t_house *)(((void *)last_house + HOUSE_SIZE) + last_house->size);
-	} else new_house = (t_house *)(((void *)field + FIELD_SIZE));
+		// new_house += 16 - ((uintptr_t)new_house % 16);
+		// new_house += sizeof(t_house) % 16;
+	} else {
+		new_house = (t_house *)(((void *)field + FIELD_SIZE));
+		new_house += 16 - ((uintptr_t)new_house % 16);
+	}
 
 	// We initialize the new house
 	new_house->next = NULL;

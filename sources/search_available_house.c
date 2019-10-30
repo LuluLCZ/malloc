@@ -113,6 +113,7 @@ t_house			*find_type_and_place_in_field(t_field *field, size_t size, int type) {
 		// printf("remain size on already existant field before returning ptr of the house to malloc %lu\n", field->remain_size);
 	} else { // Else we create a field corresponding to the size given
 		field = create_new_field(size);
+		if (field == NULL) return NULL;
 		new_house = create_new_house(field, NULL, size);
 		// printf("into field-> %p\n", new_field);
 		// if (field) printf("new field %zu\n", field->remain_size);

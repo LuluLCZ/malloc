@@ -22,13 +22,14 @@
 void				*calloc(size_t count, size_t size) {
 	ft_putstr("-----------CALLOCATION-------------\n");
 	void			*house;
-
 	if (count == 0 || size == 0) return NULL;
+	size_t new_size = size * count;
+	new_size = new_size + 16 - (new_size % 16);
 	// First we need to malloc the right size which is the product of the two operands
-	house = malloc(size * count);
+	house = malloc(new_size);
 	// Then we need to put 0 on any byte of the bloc 
 	if (house) {
-		ft_bzero(house, size * count);
+		ft_bzero(house, new_size);
 		ft_putstr("-----------END1CALLOCATION-------------\n");
 		return (house);
 	}

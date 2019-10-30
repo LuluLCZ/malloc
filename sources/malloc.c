@@ -57,6 +57,7 @@ void    *malloc(size_t size) {
 	// ft_putnbr(type);
 	// printf("TYPE AT THE BEGINING ---> %d\n", type);
 	house = find_type_and_place_in_field(field, size, type);
+	if (house == NULL) return NULL;
 	// printf("returning %p\n", house);
 
 	// fprintf(stderr, "address returned by malloc %p\n", house);

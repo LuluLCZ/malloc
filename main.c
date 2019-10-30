@@ -1,6 +1,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include "includes/malloc.h"
+#include <sys/stat.h>
 #include <unistd.h>
 
 #define M (1024 * 1024)
@@ -24,7 +25,54 @@ int main()
     // // show_alloc_mem();
     // return 0;
     char *addr = malloc(1);
-    addr = realloc(addr, 6549876);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    addr = realloc(addr, 1000);
+    free(addr);
     printf("%p\n", addr);
     // ------------------------------
     // char *addr;

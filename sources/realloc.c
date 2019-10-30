@@ -37,7 +37,7 @@ void				*realloc(void *ptr, size_t size) {
 		else {
 			if (field_house.house->size == size) return (ptr);
 			field_house.house->free = true;
-			new_ptr = malloc(size);
+			if ((new_ptr = malloc(size)) == NULL) return NULL;
 			ft_memcpy(new_ptr, ptr, field_house.house->size > size ? size : field_house.house->size);
 			free(ptr);
 			ft_putstr("-----------END1REALLOC-------------\n");
@@ -62,25 +62,27 @@ void				*reallocf(void *ptr, size_t size) {
 	field_house = find_field_house_according_ptr(ptr, false);
 	if (!field_house.field || !field_house.house) {
 		free(ptr);
-		// return NULL;
+		ft_putstr("-----------END1REALwLOeCF-------------\n");
+		return (void *)0xdeadffbf;
 	}
 	else {
 		if (field_house.house->free) {
 			free(ptr);
-			// return NULL;
+			ft_putstr("-----------END1REALLOeCF-------------\n");
+			return (void *)0xdeadccbf;
 		}
 		else {
 			if (field_house.house->size == size) return (ptr);
 			field_house.house->free = true;
-			new_ptr = malloc(size);
+			if ((new_ptr = malloc(size)) == NULL) return NULL;
 			ft_memcpy(new_ptr, ptr, field_house.house->size > size ? size : field_house.house->size);
 			free(ptr);
-	ft_putstr("-----------END1REALLOCF-------------\n");
+			ft_putstr("-----------END1REALLOCF-------------\n");
 			return (new_ptr);
 		}
 	}
 	free(ptr);
 	ft_putstr("-----------END2REALLOCF-------------\n");
-	return NULL;
+	return (void *)0xdeadbf;
 }
 

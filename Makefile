@@ -5,7 +5,7 @@ endif
 NAME = libft_malloc_$(HOSTTYPE).so
 
 
-CC = gcc
+CC = clang 
 
 OPTIONS = -c 
 
@@ -48,11 +48,10 @@ libft:
 	make -C $(HEAD_DIR)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJS)
 	cd $(HEAD_DIR) && $(MAKE) $@
 
 fclean: clean
-	$(RM) $(OBJS)
 	$(RM) $(NAME)
 
 

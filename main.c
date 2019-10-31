@@ -12,75 +12,77 @@ void print(char *s) {
 
 int main() 
 {
-    // int i;
-    // char *addr;
+    int i;
+    char *addr;
 
-    // i = 0;
-    // while (i < 1024) {
-    //     addr= (char *)malloc(1024);
-    //     addr[0] = 42;
-    //     free(addr);
-    //     i++;
-    // }
-    // // show_alloc_mem();
-    // return 0;
-    char *addr = malloc(1);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    addr = realloc(addr, 1000);
-    free(addr);
-    printf("%p\n", addr);
+    i = 0;
+    while (i < 5) {
+        addr = (char *)reallocf(addr, 1024);
+        printf("%p addr\n", addr);
+        addr[0] = 42;
+        // free(addr);
+        i++;
+    }
+    // show_alloc_mem();
+    return 0;
+    // char *addr = malloc(1);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // addr = realloc(addr, 1000);
+    // free(addr);
+    // printf("%p\n", addr);
     // ------------------------------
     // char *addr;
 
-    // addr = malloc(16);
+    // addr = malloc(-1);
     // free(NULL);
     // free((void *)addr + 5);
     // if (realloc((void *)addr + 5, 10) == NULL) print("Bonjours\n");
+    // return (0);
     //-----------------------------------
   
     // char *malloc1 = (char *)malloc(131);
@@ -136,7 +138,19 @@ int main()
     // addr3 = (char *)realloc(addr1, 128*M);
     // addr3[127*M] = 42;
     // print(addr3);
+    // return (0);
     // // ---------------------------------------
+    // char *addr1;
+    // char *addr3;
+
+    // addr1 = (char *)malloc(16*M);
+    // strcpy(addr1, "Bonjours\n");
+    // print(addr1);
+    // addr3 = (char *)realloc(addr1, 128*M);
+    // addr3[127*M] = 42;
+    // print(addr3);
+    // return (0);
+    // ------------------------------------------
     // char *addr1 = (char *)malloc(10);
     // char *addr3 = (char *)malloc(504);
     // char *addr4 = (char *)malloc(3024);

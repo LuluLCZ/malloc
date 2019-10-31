@@ -78,5 +78,5 @@ void			show_alloc_mem() {
 	ft_putstr("TOTAL: ");
 	ft_putnbr(tmp);
 	ft_putstr(" octets\n");
-	ft_putnbr(i);
+	// ft_putnbr(i);
 }

@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <math.h>
+pthread_mutex_t g_mut = PTHREAD_MUTEX_INITIALIZER;
 
 int			get_type(size_t size) {
 	size_t		content_size;
@@ -30,10 +31,10 @@ int			get_type(size_t size) {
 
 // Alloc "size" memory and return pointer to the allocated memory usgin mmap function
 void    *malloc(size_t size) {
-	ft_putstr("---------------------MALLOC---------------------\n");
-	ft_putstr("sizeof(house) == ");
-	ft_putnbr(sizeof(t_house));
-	ft_putstr("\n");
+	// ft_putstr("---------------------MALLOC---------------------\n");
+	// ft_putstr("sizeof(house) == ");
+	// ft_putnbr(sizeof(t_house));
+	// ft_putstr("\n");
 	t_field		*field;
 	t_house		*house;
 	t_house		*last_house;	
@@ -41,8 +42,8 @@ void    *malloc(size_t size) {
 
 	// Protect your malloc if size if null
 	if (size <= 0) {
-		write(1, "o", 1);
-		size = 16;
+		// write(1, "o", 1);
+		return NULL;
 	}
 	if (size % 16 != 0) {
 		
@@ -53,18 +54,20 @@ void    *malloc(size_t size) {
 	// ft_putnbr(size);
 	// ft_putchar('|');
 	// fprintf(stdout, "\n%zu\n", size);
-	// type = get_type(size);
+	type = get_type(size);
 	// ft_putnbr(type);
 	// printf("TYPE AT THE BEGINING ---> %d\n", type);
+	pthread_mutex_lock(&g_mut);
 	house = find_type_and_place_in_field(field, size, type);
 	if (house == NULL) return NULL;
 	// printf("returning %p\n", house);
+	pthread_mutex_unlock(&g_mut);
 
 	// fprintf(stderr, "address returned by malloc %p\n", house);
 	// ft_putnbr();
 	if ((intptr_t)(house + 1) % 16 != 0) {
 		ft_putstr("pas bon");
 	}
-	ft_putstr("-----------------END MALLOC---------------------\n");
+	// ft_putstr("-----------------END MALLOC---------------------\n");
 	return (house + 1);
 }

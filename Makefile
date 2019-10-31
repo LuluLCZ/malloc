@@ -5,7 +5,7 @@ endif
 NAME = libft_malloc_$(HOSTTYPE).so
 
 
-CC = clang 
+CC = gcc
 
 OPTIONS = -c 
 

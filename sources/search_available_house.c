@@ -83,6 +83,7 @@ t_house			*create_new_house(t_field *field, t_house *last_house, size_t size) {
 t_field			*find_field_according_to_size_type(t_field *field, size_t size, int type) {
 	field = get_first_in_list();
 	while (field) {
+		// printf("%zu -> size\n%zu -> field remain size\n%zu -> size + HOUSE_SIZE\n%p field addr\n%d -> field type == %d type", size, field->remain_size, size + HOUSE_SIZE, field, field->type, type);
 		if (field->type == type && field->remain_size > size + HOUSE_SIZE) break;
 		field = field->next;
 	}
@@ -99,19 +100,24 @@ t_house			*find_type_and_place_in_field(t_field *field, size_t size, int type) {
 
 	// We first check if there is a field with a free house available for this new malloc;
 	// printf("remain size on already existant field before returning ptr of the house to malloc\n");
-	if (field && field->type != TYPE_LARGE && (new_house = search_room_for_house(size, type))) return (new_house);
+	if (field && field->type != TYPE_LARGE && (new_house = search_room_for_house(size, type))) {
+		return (new_house);
+	}
 
 	 
 	field = find_field_according_to_size_type(field, size, type);
 	// If we find a field with the same type and enough available place -> create block at the end of the list
 	// If there is no room for the house, do as if you had no field
+	// printf("%p: FIELD\n", field);
 	if ((field && field->remain_size >= (size + HOUSE_SIZE) && field->type == type) || (field && field->type != TYPE_LARGE)) {
 		last_house = get_last_house(field);
 		new_house = create_new_house(field, last_house, size);
+		// ft_putstr("not creating new field\n");
 		// printf("into field-> %p\n", field);
 		// printf("old field %zu\n", field->remain_size);
 		// printf("remain size on already existant field before returning ptr of the house to malloc %lu\n", field->remain_size);
 	} else { // Else we create a field corresponding to the size given
+		// ft_putstr("creating new field\n");
 		field = create_new_field(size);
 		if (field == NULL) return NULL;
 		new_house = create_new_house(field, NULL, size);

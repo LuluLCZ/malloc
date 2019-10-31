@@ -15,6 +15,10 @@
 # include <sys/mman.h>
 # include <stdbool.h>
 # include "../libft/includes/libft.h"
+# include <pthread.h>
+# include <stddef.h>
+# include <errno.h>
+# include <unistd.h>
 
 # define TYPE_TINY 0
 # define TYPE_SMALL 1

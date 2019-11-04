@@ -25,10 +25,16 @@ void print_address_hex(void* p0) {
     int i;
     uintptr_t p = (uintptr_t)p0;
 
-    ft_putchar('0'); ft_putchar('x');
-    for(i = (sizeof(p) << 3) - 4; i>=0; i -= 4) {
-        ft_putchar(hex_digit((p >> i) & 0xf));
-    }
+    ft_putchar('0');
+	ft_putchar('x');
+	i = (sizeof(p) << 2) - 4;
+	while (i >= 0) {
+		i -= 4;
+		ft_putchar(hex_digit((p >> i) & 0xf));
+	}
+    // for(i = (sizeof(p) << 2) - 4; i>=0; i -= 4) {
+    //     ft_putchar(hex_digit((p >> i) & 0xf));
+    // }
 }
 
 void			show_alloc_mem() {

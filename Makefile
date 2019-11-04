@@ -10,7 +10,7 @@ CC = gcc
 
 OPTIONS = -c 
 
-CFLAGS = -g3 -Wall -Wextra -Werror -fPIC
+CFLAGS = -g3
 
 RM = rm -Rfv
 

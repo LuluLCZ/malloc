@@ -6,9 +6,9 @@
 
 #define M (1024 * 1024)
 
-void print(char *s) {
-    write(1, s, strlen(s));
-}
+// void print(char *s) {
+//     write(1, s, strlen(s));
+// }
 
 int main() 
 {
@@ -159,21 +159,21 @@ int main()
     // print(addr3);
     // return (0);
     // ------------------------------------------
-    // char *addr1 = (char *)malloc(10);
-    // char *addr3 = (char *)malloc(504);
-    // char *addr4 = (char *)malloc(3024);
-    // char *addr5 = (char *)malloc(1024);
-    // char *addr6 = (char *)malloc(1024);
-    // char *addr7 = (char *)malloc(1024*32);
-    // char *addr8 = (char *)malloc(1024*1024);
-    // char *addr9 = (char *)malloc(1024*1024*16);
-    // char *addr10 = (char *)malloc(1024*1024*128);
-    // char *addr11 = (char *)malloc(1024*1024*128);
-    // char *addr12 = (char *)malloc(1024*1024*128);
-    // char *addr13 = (char *)malloc(1024*1024*128);
-    // char *addr14 = (char *)malloc(1024*1024*128);
-    // char *addr15 = (char *)malloc(1024*1024*128);
-    // show_alloc_mem();
+    char *addr1 = (char *)malloc(10);
+    char *addr3 = (char *)malloc(504);
+    char *addr5 = (char *)malloc(1024);
+    char *addr6 = (char *)malloc(1024);
+    char *addr4 = (char *)malloc(3024);
+    char *addr7 = (char *)malloc(1024*32);
+    char *addr8 = (char *)malloc(1024*1024);
+    char *addr9 = (char *)malloc(1024*1024*16);
+    char *addr10 = (char *)malloc(1024*1024*128);
+    char *addr11 = (char *)malloc(1024*1024*128);
+    char *addr12 = (char *)malloc(1024*1024*128);
+    char *addr13 = (char *)malloc(1024*1024*128);
+    char *addr14 = (char *)malloc(1024*1024*128);
+    char *addr15 = (char *)malloc(1024*1024*128);
+    show_alloc_mem();
     // free(addr1);
     // free(addr3);
     // free(addr4);

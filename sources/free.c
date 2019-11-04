@@ -27,9 +27,9 @@ t_free				find_field_house_according_ptr(void *ptr, bool need_to_free) {
 	// printf("first field-> %p\n", field);
 	while (field) {
 		house = field->base;
-		while (house) {
+		while (house != NULL) {
 			// If the address of the pointer equals the house, return field and house
-			if (ptr - HOUSE_SIZE== house) {
+			if (ptr - HOUSE_SIZE == house) {
 				// printf("FOUND: ptr->address %p \n", ptr - HOUSE_SIZE);
 				if (need_to_free) {
 					// printf("FOUND: house->address %p \n", house);
@@ -42,7 +42,8 @@ t_free				find_field_house_according_ptr(void *ptr, bool need_to_free) {
 			// printf("house->address %p \n", (void *)house);
 			// printf("ptr->address %p \n", ptr - HOUSE_SIZE);
 			// printf("out");
-			house = house->next;
+			if (house && house->next) house = house->next;
+			else break;
 		}
 		field = field->next;
 	}
@@ -106,10 +107,10 @@ void				clean_field(t_field *field) {
 void				free(void *ptr) {
 	// fprintf(stderr, "trying to free %p\n", ptr);
 	// ft_putstr("--------------------------FREE-----------------------\n");
-	t_field			*field;
-	t_house			*house;
+	// t_field			*field;
+	// t_house			*house;
 	t_free			field_house;
-	int				type;
+	// int				type;
 
 	// printf("ad")
 	if (ptr == NULL) {

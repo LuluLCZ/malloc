@@ -12,21 +12,29 @@ void print(char *s) {
 
 int main() 
 {
-    int i;
-    char *addr;
+    // int i;
+    // char *addr;
 
-    i = 0;
-    while (i < 5) {
-        addr = (char *)reallocf(addr, 1024);
-        printf("%p addr\n", addr);
-        addr[0] = 42;
-        // free(addr);
-        i++;
-    }
+    // i = 0;
+    // while (i < 1024) {
+    //     addr = (char *)malloc(1024);
+    //     free(addr);
+    //     realloc(addr, 100);
+    //     addr = reallocf(addr, 1025);
+    //     addr = calloc(1025, 2048);
+    //     printf("%p addr\n", addr);
+    //     addr = realloc(addr, 100);
+    //     addr = reallocf(addr, 1025);
+    //     addr = calloc(1025, 2048);
+    //     addr = reallocf
+    //     addr[0] = 42;
+    //     free(addr);
+    //     i++;
+    // }
     // show_alloc_mem();
-    return 0;
+    // return 0;
     // char *addr = malloc(1);
-    // addr = realloc(addr, 1000);
+    // char *addr = realloc(addr, 1000);
     // addr = realloc(addr, 1000);
     // addr = realloc(addr, 1000);
     // addr = realloc(addr, 1000);
@@ -110,7 +118,7 @@ int main()
 
 
     // char *malloc1 = (char *)malloc(4);
-    // malloc1 = (char *)ft_realloc(malloc1, 4096*3);
+    // malloc1 = (char *)realloc(malloc1, 4096*3);
     // printf("%s", malloc1);
     // char *malloc2 = calloc(2, 4096);
     // free(malloc2);

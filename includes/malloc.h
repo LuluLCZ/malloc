@@ -24,8 +24,8 @@
 # define TYPE_SMALL 1
 # define TYPE_LARGE 2
 
-# define TINY (256 * getpagesize())
-# define SMALL (512 * getpagesize())
+# define TINY (512 * getpagesize())
+# define SMALL (1024 * getpagesize())
 
 # define HOUSE_SIZE sizeof(struct s_house)
 # define FIELD_SIZE sizeof(struct s_field)

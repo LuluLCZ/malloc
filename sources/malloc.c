@@ -37,9 +37,10 @@ void    *malloc(size_t size) {
 	// ft_putstr("\n");
 	t_field		*field;
 	t_house		*house;
-	t_house		*last_house;	
+	// t_house		*last_house;
 	int			type;
 
+	field = NULL;
 	// Protect your malloc if size if null
 	if (size <= 0) {
 		// write(1, "o", 1);
@@ -59,11 +60,11 @@ void    *malloc(size_t size) {
 	// printf("TYPE AT THE BEGINING ---> %d\n", type);
 	pthread_mutex_lock(&g_mut);
 	house = find_type_and_place_in_field(field, size, type);
-	if (house == NULL) return NULL;
-	// printf("returning %p\n", house);
 	pthread_mutex_unlock(&g_mut);
+	// fprintf(stderr, "address returned by malloc %p\n", house + 1);
+	if (house == NULL) return NULL;
+	// printf("returning %p\n", (void *)house);
 
-	// fprintf(stderr, "address returned by malloc %p\n", house);
 	// ft_putnbr();
 	if ((intptr_t)(house + 1) % 16 != 0) {
 		ft_putstr("pas bon");

@@ -23,7 +23,7 @@ t_house			*search_room_for_house(size_t size, int type) {
 			house = field->base;
 			if (!house) return NULL;
 			while (house) {
-				if (house->free == true && house->size >= size) {
+				if (house->free == true && house->size == size) {
 					house->free = false;
 					return house;
 				}
@@ -44,11 +44,6 @@ t_house			*create_new_house(t_field *field, t_house *last_house, size_t size) {
 		printf("NOT GOOD -> create_new_house but no space should never happen\n");
 	}
 
-	// new_house = mmap(NULL, size + HOUSE_SIZE, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
-	// if (new_house == (void *)-1) {
-	// 	// printf("wesh2");
-	// 	return NULL;
-	// }
 	if (last_house != NULL) {
 		new_house = (t_house *)(((void *)last_house + HOUSE_SIZE) + last_house->size);
 		// new_house += 16 - ((uintptr_t)new_house % 16);
@@ -84,11 +79,11 @@ t_field			*find_field_according_to_size_type(t_field *field, size_t size, int ty
 	field = get_first_in_list();
 	while (field) {
 		// printf("%zu -> size\n%zu -> field remain size\n%zu -> size + HOUSE_SIZE\n%p field addr\n%d -> field type == %d type", size, field->remain_size, size + HOUSE_SIZE, field, field->type, type);
-		if (field->type == type && field->remain_size > size + HOUSE_SIZE) break;
+		if (field->type == type && field->remain_size >= size + HOUSE_SIZE) return field;
 		field = field->next;
 	}
-	if (!field) return NULL;
-	return field;
+	return NULL;
+	// return field;
 }
 
 t_house			*find_type_and_place_in_field(t_field *field, size_t size, int type) {
@@ -101,7 +96,9 @@ t_house			*find_type_and_place_in_field(t_field *field, size_t size, int type) {
 	// We first check if there is a field with a free house available for this new malloc;
 	// printf("remain size on already existant field before returning ptr of the house to malloc\n");
 	if (field && field->type != TYPE_LARGE && (new_house = search_room_for_house(size, type))) {
-		return (new_house);
+		// ft_putstr("yo");
+		if (new_house != NULL) return (new_house);
+		new_house = NULL;
 	}
 
 	 
@@ -111,9 +108,13 @@ t_house			*find_type_and_place_in_field(t_field *field, size_t size, int type) {
 	// printf("%p: FIELD\n", field);
 	if ((field && field->remain_size >= (size + HOUSE_SIZE) && field->type == type) || (field && field->type != TYPE_LARGE)) {
 		last_house = get_last_house(field);
+		// ft_putstr("eukay");
 		new_house = create_new_house(field, last_house, size);
+		// ft_putnbr(new_house->size);
+		// ft_putchar('\n');
+		// show_alloc_mem();
 		// ft_putstr("not creating new field\n");
-		// printf("into field-> %p\n", field);
+		// ft_putstr((void *)new_house);
 		// printf("old field %zu\n", field->remain_size);
 		// printf("remain size on already existant field before returning ptr of the house to malloc %lu\n", field->remain_size);
 	} else { // Else we create a field corresponding to the size given

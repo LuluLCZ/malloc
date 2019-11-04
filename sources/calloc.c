@@ -25,11 +25,14 @@ void				*calloc(size_t count, size_t size) {
 	void			*house;
 	house = NULL;
 	// First we need to malloc the right size which is the product of the two operands
-	if ((house = malloc(size * count))) {
+	// ft_putnbr(size * count);
+	house = malloc(size * count);
+	if (house != NULL) {
 		// Then we need to put 0 on any byte of the bloc 
 		pthread_mutex_lock(&g_mut);
 		ft_memset(house, 0, size * count);
 		pthread_mutex_unlock(&g_mut);
+		// printf("%p -> house\n", house);
 		// ft_putstr("-----------END1CALLOCATION-------------\n");
 		return (house);
 	}

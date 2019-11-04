@@ -18,7 +18,7 @@
 
 size_t			get_proper_size(size_t size, int *type, size_t *space_left) {
 	size_t		content_size;
-	size_t		page_size;
+	// size_t		page_size;
 	size_t		final_size;
 
 	// Type : (page_size given by getpagesize() generally equals to 4kB - 4096)
@@ -60,7 +60,6 @@ t_field			*create_new_field(size_t size) {
 	final_size = get_proper_size(size, &type, &space_left);
 	field = mmap(0, final_size + FIELD_SIZE, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (field == (void *)-1) {
-		printf("wesh1");
 		return NULL;
 	}
 	field->base = NULL;

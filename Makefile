@@ -3,13 +3,14 @@ HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
 NAME = libft_malloc_$(HOSTTYPE).so
+LINK = libft_malloc.so
 
 
 CC = gcc
 
 OPTIONS = -c 
 
-CFLAGS = -g3
+CFLAGS = -g3 -Wall -Wextra -Werror -fPIC
 
 RM = rm -Rfv
 
@@ -37,7 +38,7 @@ all:  $(NAME)
 
 $(NAME) : libft $(OBJS)
 	$(RM) $(NAME)
-	$(CC) -shared -o $@ $(OBJS) $(HEAD_DIR)/libft.a
+	$(CC) -lpthread -shared -o $@ $(OBJS) $(HEAD_DIR)/libft.a
 	ln -fs $(NAME) libft_malloc.so
 
 $(DIR_OBJ)/%.o: $(DIR_SRC)/%.c

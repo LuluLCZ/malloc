@@ -25,7 +25,10 @@ void				*realloc(void *ptr, size_t size) {
 	t_free			field_house;
 	void			*new_ptr;
 	// If ptr == null just return malloc(size)
-	if (!ptr) return (malloc(size));
+	if (ptr == NULL) {
+		// ft_putstr("aya");
+		return (malloc(size));
+	}
 
 	// If size = 0 -> free the pointer
 	// ft_putnbr(size);
@@ -33,9 +36,15 @@ void				*realloc(void *ptr, size_t size) {
 
 	// We need to find the house provided to free it and allocate it again
 	field_house = find_field_house_according_ptr(ptr, false);
-	if (!field_house.field || !field_house.house) return NULL;
+	if (!field_house.field || !field_house.house) {
+		return NULL;
+	}
 	else {
-		if (field_house.house->free) return NULL;
+		if (field_house.house->free) {
+			// ft_putstr("heyyyo");
+			field_house.house->free = false;
+			return ptr;
+		}
 		else {
 			if (field_house.house->size == size) return (ptr);
 			field_house.house->free = true;
@@ -77,7 +86,7 @@ void				*reallocf(void *ptr, size_t size) {
 	// show_alloc_mem();
 	if (!field_house.field || !field_house.house) {
 		// free(ptr);
-		ft_putstr("-----------END1REALwLOeCF-------------\n");
+		// ft_putstr("-----------END1REALwLOeCF-------------\n");
 		return ptr;
 	}
 	else {
@@ -88,21 +97,17 @@ void				*reallocf(void *ptr, size_t size) {
 			return new_ptr;
 		}
 		else {
-			if (field_house.house->size == size) {
-				// ft_putstr("-----------END2REALLOeCF-------------\n");
-				// ft_putstr("aki\n");
-				return (ptr);
-			}
-			field_house.house->free = true;
-			if ((new_ptr = malloc(size)) == NULL) {
-				
+			new_ptr = malloc(size);
+			if (new_ptr == NULL) {
+				free(ptr);
 				ft_putstr("malloc in realloc returned null\n");
 				return new_ptr;
 			}
+			// field_house.house->free = true;
 
 			ft_memcpy(new_ptr, ptr, size);
 			free(ptr);
-			ft_putstr("-----------END1REALLOCF-------------\n");
+			// ft_putstr("-----------END1REALLOCF-------------\n");
 			return (new_ptr);
 		}
 	}
